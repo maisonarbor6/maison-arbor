@@ -1,0 +1,185 @@
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/assets/fonts/PlayfairDisplay-VariableFont_wght.woff2")
+    format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans-Variable.woff2") format("woff2");
+  font-weight: 100 700;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark luxury palette — near-black charcoal base */
+    --background: 11% 0.01 55;
+    --foreground: 94% 0.005 75;
+    --card: 16% 0.012 55;
+    --card-foreground: 94% 0.005 75;
+    --popover: 16% 0.012 55;
+    --popover-foreground: 94% 0.005 75;
+    /* Rose gold — primary accent */
+    --primary: 68% 0.09 35;
+    --primary-foreground: 11% 0.01 55;
+    --secondary: 22% 0.015 55;
+    --secondary-foreground: 94% 0.005 75;
+    --muted: 20% 0.01 55;
+    --muted-foreground: 65% 0.008 70;
+    --accent: 68% 0.09 35;
+    --accent-foreground: 11% 0.01 55;
+    --destructive: 55% 0.2 27;
+    --destructive-foreground: 94% 0.005 75;
+    --border: 28% 0.015 55;
+    --input: 22% 0.015 55;
+    --ring: 68% 0.09 35;
+    --radius: 0.25rem;
+    /* Charts */
+    --chart-1: 68% 0.09 35;
+    --chart-2: 55% 0.08 155;
+    --chart-3: 50% 0.1 200;
+    --chart-4: 60% 0.12 90;
+    --chart-5: 45% 0.15 30;
+    /* Sidebar */
+    --sidebar: 14% 0.012 55;
+    --sidebar-foreground: 94% 0.005 75;
+    --sidebar-primary: 68% 0.09 35;
+    --sidebar-primary-foreground: 11% 0.01 55;
+    --sidebar-accent: 22% 0.015 55;
+    --sidebar-accent-foreground: 94% 0.005 75;
+    --sidebar-border: 28% 0.015 55;
+    --sidebar-ring: 68% 0.09 35;
+    /* Custom brand tokens */
+    --dark-bg: 11% 0.01 55;
+    --dark-bg-lighter: 16% 0.012 55;
+    --terracotta: 68% 0.09 35;
+    --pillars-bg: 14% 0.012 55;
+    --ivory: 97.5% 0.008 75;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-color: oklch(11% 0.01 55);
+    color: oklch(97.5% 0.008 75);
+    font-family: "General Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: "Playfair Display", serif;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Playfair Display", serif;
+  }
+  .font-body {
+    font-family: "General Sans", sans-serif;
+  }
+
+  /* Dark section base */
+  .bg-dark-section {
+    background-color: oklch(11% 0.01 55);
+  }
+
+  .bg-dark-lighter {
+    background-color: oklch(16% 0.012 55);
+  }
+
+  /* Pillars section — slightly lighter dark */
+  .bg-pillars-section {
+    background-color: oklch(14% 0.012 55);
+  }
+
+  /* Grain texture overlay — adds material depth */
+  .grain-texture {
+    position: relative;
+  }
+  .grain-texture::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    z-index: 1;
+  }
+  .grain-texture > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .text-ivory {
+    color: oklch(97.5% 0.008 75);
+  }
+  .text-terracotta {
+    color: oklch(68% 0.09 35);
+  }
+  .tracking-widest-xl {
+    letter-spacing: 0.25em;
+  }
+
+  /* Editorial headline — viewport-scaled */
+  .hero-headline-scale {
+    font-size: clamp(3.5rem, 11.5vw, 10.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+  }
+
+  /* Product card name hover underline — cream on dark */
+  .product-name-hover {
+    background-image: linear-gradient(
+      oklch(97.5% 0.008 75),
+      oklch(97.5% 0.008 75)
+    );
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.3s ease;
+  }
+  .product-name-hover:hover,
+  .group:hover .product-name-hover {
+    background-size: 100% 1px;
+  }
+
+  /* Section hairline divider — dark palette */
+  .section-rule {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      oklch(28% 0.015 55),
+      oklch(28% 0.015 55),
+      transparent
+    );
+  }
+
+  /* Elegant shadow for dark cards */
+  .shadow-elegant {
+    box-shadow: 0 4px 24px oklch(5% 0.01 55 / 0.5);
+  }
+}
